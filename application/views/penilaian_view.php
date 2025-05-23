@@ -9,13 +9,13 @@
                             <button type="submit" class="btn btn-primary">Simpan Penilaian</button>
                         </div>
                     </div>
-                    <div class="card-body" style="display: block;">
+                    <div class="card-body table-responsive" style="display: block;">
                         <table id="example1" class="table table-bordered table-striped w-100">
                             <thead>
                                 <tr>
-                                    <th rowspan="2" class="align-middle text-center">No</th>
-                                    <th rowspan="2" class="align-middle text-center">Nama</th>
-                                    <th rowspan="2" class="align-middle text-center">Jenis Kelamin</th>
+                                    <th rowspan="2" class="align-middle text-start">No</th>
+                                    <th rowspan="2" class="align-middle text-start">Nama</th>
+                                    <th rowspan="2" class="align-middle text-start">Jenis Kelamin</th>
                                     <th colspan="<?= count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Input Nilai</th>
                                 </tr>
                                 <tr>
@@ -34,7 +34,7 @@
                                             <td><?= $k['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan'; ?></td>
                                             <?php foreach ($k['kriterias'] as $kriteria) : ?>
                                                 <td>
-                                                    <select name="nilai[<?= $k['karyawan_id'] ?>][<?= $kriteria['kriteria_id'] ?>]" class="form-control" required>
+                                                    <select name="nilai[<?= $k['karyawan_id'] ?>][<?= $kriteria['kriteria_id'] ?>]" class="form-control" required style="min-width: 120px;">
                                                         <option value="">- Pilih Nilai -</option>
                                                         <?php foreach ($kriteria_sub[$kriteria['kriteria_id']] ?? [] as $sub) : ?>
                                                             <option value="<?= $sub['id'] ?>" <?= $kriteria['kriteria_sub_id'] == $sub['id'] ? 'selected' : '' ?>>

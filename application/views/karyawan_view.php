@@ -27,7 +27,7 @@
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah Karyawan</button>
                     </div>
                 </div>
-                <div class="card-body" style="display: block;">
+                <div class="card-body table-responsive" style="display: block;">
                     <table id="example1" class="table table-bordered table-striped w-100">
                         <thead>
                             <tr>
