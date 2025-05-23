@@ -36,10 +36,10 @@ CREATE TABLE kriteria_sub (
     departemen VARCHAR(100),
     tanggal_masuk DATE,
     status_karyawan ENUM('Tetap', 'Kontrak', 'Magang') DEFAULT 'Tetap',
-    gaji_pokok DECIMAL(15,2),
-    foto VARCHAR(255),                      -- Path ke file foto
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT NULL,
+    updated_by INT NULL,
 );
 
 INSERT INTO karyawan (nik, nama_lengkap, jenis_kelamin, tempat_lahir, tanggal_lahir, alamat, no_hp, email, jabatan, departemen, tanggal_masuk, status_karyawan, gaji_pokok, foto)

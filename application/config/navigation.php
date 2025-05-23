@@ -35,14 +35,14 @@ $config['navigation'] = [
     [
         'label' => 'Input Penilaian',
         'icon'  => 'fas fa-clipboard-check',
-        'url'   => 'karyawan',
-        'active' => ['karyawan']
+        'url'   => 'penilaian',
+        'active' => ['penilaian']
     ],
     [
         'label' => 'Hasil Penilaian',
         'icon'  => 'fas fa-poll',
-        'url'   => 'karyawan',
-        'active' => ['karyawan']
+        'url'   => 'hasil',
+        'active' => ['hasil']
     ],
     [
         'label' => 'Logout',
