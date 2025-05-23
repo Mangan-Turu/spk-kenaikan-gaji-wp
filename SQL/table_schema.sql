@@ -50,3 +50,53 @@ VALUES
 ('KRY004', 'Dewi Lestari', 'P', 'Yogyakarta', '1994-11-12', 'Jl. Malioboro No. 45, Yogyakarta', '081234111222', 'dewi.lestari@example.com', 'Marketing Executive', 'Marketing', '2020-02-10', 'Tetap', 6500000.00, 'uploads/foto/dewi.jpg'),
 ('KRY005', 'Eko Prasetyo', 'L', 'Semarang', '1991-01-25', 'Jl. Pandanaran No. 33, Semarang', '082112223344', 'eko.prasetyo@example.com', 'Customer Service', 'Operasional', '2021-05-20', 'Magang', 3000000.00, 'uploads/foto/eko.jpg');
 
+CREATE TABLE penilaian (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    karyawan_id INT NOT NULL,
+    kriteria_id INT NOT NULL,
+    kriteria_sub_id INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT NULL,
+    updated_by INT NULL,
+
+    FOREIGN KEY (karyawan_id) REFERENCES karyawan(id) ON DELETE CASCADE,
+    FOREIGN KEY (kriteria_id) REFERENCES kriteria(id) ON DELETE CASCADE,
+    FOREIGN KEY (kriteria_sub_id) REFERENCES kriteria_sub(id) ON DELETE CASCADE
+);
+INSERT INTO penilaian (karyawan_id, kriteria_id, kriteria_sub_id, created_by, updated_by) VALUES
+(1, 1, NULL, 1, 1),
+(2, 1, NULL, 1, 1),
+(3, 1, NULL, 1, 1),
+(4, 1, NULL, 1, 1),
+(5, 1, NULL, 1, 1),
+
+(1, 2, NULL, 1, 1),
+(2, 2, NULL, 1, 1),
+(3, 2, NULL, 1, 1),
+(4, 2, NULL, 1, 1),
+(5, 2, NULL, 1, 1),
+
+(1, 3, NULL, 1, 1),
+(2, 3, NULL, 1, 1),
+(3, 3, NULL, 1, 1),
+(4, 3, NULL, 1, 1),
+(5, 3, NULL, 1, 1),
+
+(1, 4, NULL, 1, 1),
+(2, 4, NULL, 1, 1),
+(3, 4, NULL, 1, 1),
+(4, 4, NULL, 1, 1),
+(5, 4, NULL, 1, 1),
+
+(1, 5, NULL, 1, 1),
+(2, 5, NULL, 1, 1),
+(3, 5, NULL, 1, 1),
+(4, 5, NULL, 1, 1),
+(5, 5, NULL, 1, 1),
+
+(1, 6, NULL, 1, 1),
+(2, 6, NULL, 1, 1),
+(3, 6, NULL, 1, 1),
+(4, 6, NULL, 1, 1),
+(5, 6, NULL, 1, 1);
