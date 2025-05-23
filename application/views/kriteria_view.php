@@ -78,6 +78,7 @@
                         <tbody>
                             <?php if (count($kriteria_sub) > 0) : ?>
                                 <?php foreach ($kriteria_sub as $key => $row): ?>
+                                    <?php var_dump($kriteria_sub) ?>
                                     <tr>
                                         <td><?= $key ?></td>
                                         <td><?= $row['kode'] ?></td>

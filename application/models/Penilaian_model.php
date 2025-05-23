@@ -16,6 +16,7 @@ class Penilaian_model extends CI_Model
             karyawan.nama_lengkap,
             karyawan.departemen,
             karyawan.jenis_kelamin,
+            penilaian.id AS penilaian_id,
             penilaian.kriteria_id,
             kriteria.kode,
             kriteria.nama AS nama_kriteria,
@@ -60,6 +61,7 @@ class Penilaian_model extends CI_Model
             }
 
             $grouped[$karyawanId]['kriterias'][] = [
+                'penilaian_id'     => $row['penilaian_id'],
                 'kriteria_id'      => $row['kriteria_id'],
                 'kode'             => $row['kode'],
                 'nama_kriteria'    => $row['nama_kriteria'],

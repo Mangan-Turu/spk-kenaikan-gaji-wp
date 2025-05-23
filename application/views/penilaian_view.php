@@ -34,7 +34,7 @@
                                             <td><?= $k['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan'; ?></td>
                                             <?php foreach ($k['kriterias'] as $kriteria) : ?>
                                                 <td>
-                                                    <select name="nilai[<?= $k['karyawan_id'] ?>][<?= $kriteria['kriteria_id'] ?>]" class="form-control" required style="min-width: 120px;">
+                                                    <select name="<?= $kriteria['penilaian_id']; ?>" class="form-control" required style="min-width: 120px;">
                                                         <option value="">- Pilih Nilai -</option>
                                                         <?php foreach ($kriteria_sub[$kriteria['kriteria_id']] ?? [] as $sub) : ?>
                                                             <option value="<?= $sub['id'] ?>" <?= $kriteria['kriteria_sub_id'] == $sub['id'] ? 'selected' : '' ?>>

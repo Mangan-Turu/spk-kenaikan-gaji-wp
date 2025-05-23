@@ -35,4 +35,18 @@ class Penilaian extends CI_Controller
         $data['contents'] = $this->load->view('penilaian_view', $data, true);
         $this->load->view('templates/admin_templates', $data);
     }
+
+    public function simpan()
+    {
+        $this->form_validation->set_rules('nilai', 'Nilai', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('penilaian');
+        } else {
+            $data = $this->input->post('nilai');
+            $this->Penilaian_model->insert($data);
+            $this->session->set_flashdata('success', 'Data berhasil disimpan.');
+            redirect('penilaian');
+        }
+    }
 }
