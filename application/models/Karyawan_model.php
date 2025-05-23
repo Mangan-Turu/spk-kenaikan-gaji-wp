@@ -13,6 +13,11 @@ class Karyawan_model extends CI_Model
         return $this->db->get_where('karyawan', ['id' => $id])->row();
     }
 
+    public function insert($data)
+    {
+        return $this->db->insert('karyawan', $data);
+    }
+
     public function update($id, $data)
     {
         return $this->db->update('karyawan', $data, ['id' => $id]);
