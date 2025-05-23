@@ -34,7 +34,8 @@
                                 <th>No</th>
                                 <th>Kode</th>
                                 <th>Nama Kriteria</th>
-                                <th colspan="2" class="text-center">Bobot</th>
+                                <th class="text-center">Bobot</th>
+                                <th class="text-center">Nilai Normalisasi</th>
                                 <th class="text-right" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>

@@ -33,7 +33,7 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2" class="align-middle text-start">No</th>
-                                    <th rowspan="2" class="align-middle text-start">Nama</th>
+                                    <th rowspan="2" class="align-middle text-start text-nowrap">Nama</th>
                                     <th rowspan="2" class="align-middle text-start">Jenis Kelamin</th>
                                     <th colspan="<?= count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Input Nilai</th>
                                 </tr>
@@ -49,7 +49,7 @@
                                     <?php foreach ($karyawans as $k) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><a href="<?= base_url('karyawan/edit/' . $k['karyawan_id']); ?>"><?= $k['nama_lengkap']; ?></a></td>
+                                            <td class="text-nowrap"><a href="<?= base_url('karyawan/edit/' . $k['karyawan_id']); ?>"><?= $k['nama_lengkap']; ?></a></td>
                                             <td><?= $k['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan'; ?></td>
                                             <?php foreach ($k['kriterias'] as $kriteria) : ?>
                                                 <td>

@@ -42,3 +42,14 @@ INSERT INTO kriteria_sub (kriteria_id, nilai, deskripsi, created_by, updated_by)
 (6, 3, 'Cukup', 1, 1),
 (6, 4, 'Baik', 1, 1),
 (6, 5, 'Sangat Baik', 1, 1);
+
+DELIMITER $$
+CREATE TRIGGER after_insert_karyawan
+AFTER INSERT ON karyawan
+FOR EACH ROW
+BEGIN
+  INSERT INTO penilaian (karyawan_id, kriteria_id, kriteria_sub_id, created_by, updated_by)
+  SELECT NEW.id, k.id, NULL, NEW.created_by, NEW.created_by
+  FROM kriteria k;
+END$$
+DELIMITER ;
