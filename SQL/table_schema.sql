@@ -1,0 +1,23 @@
+CREATE TABLE kriteria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kode VARCHAR(20) NOT NULL,
+    nama VARCHAR(100) NOT NULL,
+    atribut ENUM('benefit', 'cost') NOT NULL,
+    bobot INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT NULL,
+    updated_by INT NULL
+);
+
+CREATE TABLE kriteria_sub (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kriteria_id INT NOT NULL,
+    nilai INT NOT NULL,
+    deskripsi VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (kriteria_id) REFERENCES kriteria(id) ON DELETE CASCADE
+);
