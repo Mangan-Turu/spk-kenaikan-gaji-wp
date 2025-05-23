@@ -15,7 +15,6 @@ class Kriteria extends CI_Controller
     {
         $data['kriteria'] = $this->Kriteria_model->get_all();
         $data['kriteria_sub'] = $this->Kriteria_sub_model->get_all();
-        echo $data['kriteria_sub'];
         $data['contents'] = $this->load->view('kriteria_view', $data, true);
         $this->load->view('templates/admin_templates', $data);
     }
