@@ -63,7 +63,7 @@
                                 <td><?= htmlspecialchars($row->alamat) ?></td>
                                 <td>
                                     <a href="<?= site_url('karyawan/edit/'.$row->id) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="<?= site_url('karyawan/hapus/'.$row->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                    <button class="d-inline-block btn btn-sm btn-danger btn-hapus" data-id="<?= $row->id ?>">Hapus</button>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -75,3 +75,29 @@
     </div>
 </section>
 <?php $this->load->view('modal_tambah_karyawan'); ?>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.btn-hapus');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data ini tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '<?= base_url('karyawan/hapus/') ?>' + id;
+                    }
+                });
+            });
+        });
+    });
+</script>

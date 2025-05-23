@@ -1,3 +1,20 @@
+<?php if ($this->session->flashdata('success')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('success') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('error') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
 <section>
     <!-- Tabel Kriteria -->
     <div class="row">
@@ -7,7 +24,7 @@
                     <h2 class="card-title py-0 my-0 mt-2">Kriteria Penilaian Kelayakan Kenaikan Gaji Karyawan</h2>
 
                     <div class="card-tools">
-                        <button class="btn btn-primary">Tambah Kriteria</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahKriteria">Tambah Kriteria</button>
                     </div>
                 </div>
                 <div class="card-body" style="display: block;">
@@ -30,8 +47,8 @@
                                         <td class="text-center"><?= $k->bobot; ?>%</td>
                                         <td class="text-center"><?= $k->bobot / 100; ?></td>
                                         <td class="text-right">
-                                            <button class="d-inline-block btn btn-sm btn-warning btn-edit" data-table="kriteria">Edit</button>
-                                            <button class="d-inline-block btn btn-sm btn-danger btn-hapus" data-table="kriteria" data-id="<?= $k->id ?>">Hapus</button>
+                                            <a href="<?= site_url('kriteria/edit/'.$k->id) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= $k->id ?>" data-url="<?= base_url('kriteria/hapus/') ?>">Hapus</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -61,7 +78,7 @@
                     <h2 class="card-title py-0 my-0 mt-2">Pembobotan Sub-kriteria</h2>
 
                     <div class="card-tools">
-                        <button class="btn btn-primary">Tambah Kriteria</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahSubKriteria">Tambah Kriteria</button>
                     </div>
                 </div>
                 <div class="card-body" style="display: block;">
@@ -86,8 +103,8 @@
                                             <td class="text-center"><?= isset($row['nilai'][$i]) ? $row['nilai'][$i] : '-' ?></td>
                                         <?php endfor; ?>
                                         <td class="text-right">
-                                            <button class="d-inline-block btn btn-sm btn-warning btn-edit" data-table="kriteria">Edit</button>
-                                            <button class="d-inline-block btn btn-sm btn-danger btn-hapus" data-table="kriteria" data-id="<?= $k->id ?>">Hapus</button>
+                                            <a href="<?= site_url('kriteria/edit_sub/'.$row['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url('kriteria/hapus_sub/') ?>">Hapus</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -110,13 +127,15 @@
     <!-- End Tabel Sub Kriteria -->
 </section>
 
+<?php $this->load->view('modal_tambah_kriteria'); ?>
+<?php $this->load->view('modal_tambah_sub_kriteria'); ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.btn-hapus');
-
-        buttons.forEach(button => {
+        document.querySelectorAll('.btn-hapus').forEach(button => {
             button.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
+                const url = this.getAttribute('data-url');
 
                 Swal.fire({
                     title: 'Yakin ingin menghapus?',
@@ -129,7 +148,7 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '<?= base_url('kriteria/delete/') ?>' + id;
+                        window.location.href = url + id;
                     }
                 });
             });

@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Kriteria_sub_model extends CI_Model
 {
     private $table = 'kriteria_sub';
+    private $table_kriteria = 'kriteria';
 
     protected $user_id;
 
@@ -77,4 +78,11 @@ class Kriteria_sub_model extends CI_Model
             ->get($this->table)
             ->result_array();
     }
+
+    public function getOption()
+    {
+        $query = $this->db->select('id, nama')
+                          ->get($this->table_kriteria);
+        return $query->result_array();
+    }    
 }
