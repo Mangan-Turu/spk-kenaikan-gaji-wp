@@ -72,4 +72,28 @@ class Penilaian_model extends CI_Model
 
         return array_values($grouped);
     }
+
+    public function update_bulk($data)
+    {
+        if (empty($data)) return false;
+
+        $updateData = [];
+        foreach ($data as $id => $kriteria_sub_id) {
+            $updateData[] = [
+                'id' => $id,
+                'kriteria_sub_id' => intval($kriteria_sub_id),
+                'updated_by' => $this->session->userdata('user_id'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+        }
+
+        return $this->db->update_batch($this->table, $updateData, 'id');
+    }
+
+    public function kosongkan_penilaian()
+    {
+        $this->db->set('kriteria_sub_id', null);
+        $this->db->where('created_by', $this->session->userdata('user_id'));
+        return $this->db->update($this->table);
+    }
 }

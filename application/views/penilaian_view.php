@@ -1,3 +1,21 @@
+<?php if ($this->session->flashdata('success')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('success') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('error') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
 <section>
     <form method="post" action="<?= base_url('penilaian/simpan') ?>">
         <div class="row">
@@ -6,7 +24,8 @@
                     <div class="card-header">
                         <h2 class="card-title py-0 my-0 mt-2">Input Penilaian Karyawan</h2>
                         <div class="card-tools">
-                            <button type="submit" class="btn btn-primary">Simpan Penilaian</button>
+                            <button type="submit" name="action" value="kosongkan" class="btn btn-danger">Kosongkan Penilaian</button>
+                            <button type="submit" name="action" value="simpan" class="btn btn-primary">Simpan Penilaian</button>
                         </div>
                     </div>
                     <div class="card-body table-responsive" style="display: block;">

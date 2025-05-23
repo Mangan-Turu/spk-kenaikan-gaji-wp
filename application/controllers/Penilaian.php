@@ -38,15 +38,23 @@ class Penilaian extends CI_Controller
 
     public function simpan()
     {
-        $this->form_validation->set_rules('nilai', 'Nilai', 'required|trim');
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('error', validation_errors());
-            redirect('penilaian');
-        } else {
-            $data = $this->input->post('nilai');
-            $this->Penilaian_model->insert($data);
-            $this->session->set_flashdata('success', 'Data berhasil disimpan.');
-            redirect('penilaian');
+        $action = $this->input->post('action');
+
+        if ($action === 'kosongkan') {
+            $this->Penilaian_model->kosongkan_penilaian();
+            $this->session->set_flashdata('success', 'Penilaian berhasil dikosongkan.');
+        } elseif ($action === 'simpan') {
+            $data = $this->input->post();
+            unset($data['action']);
+
+            if (empty($data)) {
+                $this->session->set_flashdata('error', 'Tidak ada data yang dikirim.');
+            } else {
+                $this->Penilaian_model->update_bulk($data);
+                $this->session->set_flashdata('success', 'Penilaian berhasil disimpan.');
+            }
         }
+
+        redirect('penilaian');
     }
 }
