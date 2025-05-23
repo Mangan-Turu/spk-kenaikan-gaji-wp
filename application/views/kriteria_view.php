@@ -36,6 +36,7 @@
                                 <th>Nama Kriteria</th>
                                 <th class="text-center">Bobot</th>
                                 <th class="text-center">Nilai Normalisasi</th>
+                                <th class="text-center">Tren</th>
                                 <th class="text-right" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>
@@ -49,6 +50,7 @@
                                         <td><?= $k->nama; ?></td>
                                         <td class="text-center"><?= $k->bobot; ?>%</td>
                                         <td class="text-center"><?= $k->bobot / 100; ?></td>
+                                        <td class="text-center text-capitalize"><?= $k->atribut; ?></td>
                                         <td class="text-right">
                                             <a href="<?= site_url('kriteria/edit/' . $k->id) ?>" class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= $k->id ?>" data-url="<?= base_url('kriteria/hapus/') ?>">Hapus</button>

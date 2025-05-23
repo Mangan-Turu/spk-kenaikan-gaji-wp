@@ -96,4 +96,31 @@ class Penilaian_model extends CI_Model
         $this->db->where('created_by', $this->session->userdata('user_id'));
         return $this->db->update($this->table);
     }
+
+    public function get_nilai_by_karyawan($karyawan_id)
+    {
+        $this->db->select('
+            penilaian.id,
+            penilaian.karyawan_id,
+            karyawan.nik,
+            karyawan.nama_lengkap,
+            karyawan.departemen,
+            karyawan.jenis_kelamin,
+            penilaian.id AS penilaian_id,
+            penilaian.kriteria_id,
+            kriteria.kode,
+            kriteria.nama AS nama_kriteria,
+            kriteria.bobot,
+            ROUND(kriteria.bobot / 100, 2) AS nilai_normalisasi,
+            penilaian.kriteria_sub_id,
+            kriteria_sub.nilai AS nilai_sub,
+            kriteria_sub.deskripsi AS deskripsi_sub
+        ');
+        $this->db->from($this->table);
+        $this->db->join('karyawan', 'karyawan.id = penilaian.karyawan_id');
+        $this->db->join('kriteria', 'kriteria.id = penilaian.kriteria_id');
+        $this->db->join('kriteria_sub', 'kriteria_sub.id = penilaian.kriteria_sub_id', 'left');
+        $this->db->where('penilaian.karyawan_id', $karyawan_id);
+        return $this->db->get()->result_array();
+    }
 }
