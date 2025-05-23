@@ -30,7 +30,7 @@
                                     <?php foreach ($karyawans as $k) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $k['nama_lengkap']; ?></td>
+                                            <td><a href="<?= base_url('karyawan/edit/' . $k['karyawan_id']); ?>"><?= $k['nama_lengkap']; ?></a></td>
                                             <td><?= $k['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan'; ?></td>
                                             <?php foreach ($k['kriterias'] as $kriteria) : ?>
                                                 <td>
@@ -38,7 +38,7 @@
                                                         <option value="">- Pilih Nilai -</option>
                                                         <?php foreach ($kriteria_sub[$kriteria['kriteria_id']] ?? [] as $sub) : ?>
                                                             <option value="<?= $sub['id'] ?>" <?= $kriteria['kriteria_sub_id'] == $sub['id'] ? 'selected' : '' ?>>
-                                                                <?= $sub['nilai'] ?> - <?= $sub['deskripsi'] ?>
+                                                                [<?= $sub['nilai'] ?>] <?= $sub['deskripsi'] ?>
                                                             </option>
                                                         <?php endforeach; ?>
                                                     </select>
