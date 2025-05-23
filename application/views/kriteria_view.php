@@ -32,6 +32,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Kode</th>
                                 <th>Nama Kriteria</th>
                                 <th colspan="2" class="text-center">Bobot</th>
                                 <th class="text-right" style="width: 20%;">Aksi</th>
@@ -43,11 +44,12 @@
                                 <?php foreach ($kriteria as $k) : ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
+                                        <td><?= $k->kode; ?></td>
                                         <td><?= $k->nama; ?></td>
                                         <td class="text-center"><?= $k->bobot; ?>%</td>
                                         <td class="text-center"><?= $k->bobot / 100; ?></td>
                                         <td class="text-right">
-                                            <a href="<?= site_url('kriteria/edit/'.$k->id) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="<?= site_url('kriteria/edit/' . $k->id) ?>" class="btn btn-sm btn-warning">Edit</a>
                                             <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= $k->id ?>" data-url="<?= base_url('kriteria/hapus/') ?>">Hapus</button>
                                         </td>
                                     </tr>
@@ -88,29 +90,42 @@
                                 <th>No</th>
                                 <th>Kode Kriteria</th>
                                 <th>Nama Kriteria</th>
-                                <th colspan="<?= !empty($kriteria_sub['1']['nilai']) ? count($kriteria_sub['1']['nilai']) : 1 ?>" class="text-center">Nilai</th>
+                                <th colspan="<?= $count_nilai ?>" class="text-center">Nilai</th>
                                 <th class="text-right" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (count($kriteria_sub) > 0) : ?>
-                                <?php foreach ($kriteria_sub as $key => $row): ?>
+                            <?php if (!empty($kriteria_sub)) : ?>
+                                <?php $no = 1;
+                                foreach ($kriteria_sub as $row): ?>
                                     <tr>
-                                        <td><?= $key ?></td>
-                                        <td><?= $row['kode'] ?></td>
-                                        <td><?= $row['nama'] ?></td>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <td class="text-center"><?= isset($row['nilai'][$i]) ? $row['nilai'][$i] : '-' ?></td>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= htmlspecialchars($row['kode']) ?></td>
+                                        <td><?= htmlspecialchars($row['nama']) ?></td>
+
+                                        <?php
+                                        $nilaiList = $row['nilai'];
+                                        for ($i = 0; $i < $count_nilai; $i++) :
+                                            $nilai = isset($nilaiList[$i]) ? $nilaiList[$i]['deskripsi'] : '-';
+                                        ?>
+                                            <td class="text-center"><?= htmlspecialchars($nilai) ?></td>
                                         <?php endfor; ?>
+
                                         <td class="text-right">
-                                            <a href="<?= site_url('kriteria/edit_sub/'.$row['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                            <button class="btn btn-sm btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url('kriteria/hapus_sub/') ?>">Hapus</button>
+                                            <?php if (!empty($nilaiList[0]['id'])): ?>
+                                                <a href="<?= site_url('kriteria/edit_sub/' . $nilaiList[0]['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                <button class="btn btn-sm btn-danger btn-hapus"
+                                                    data-id="<?= $nilaiList[0]['id'] ?>"
+                                                    data-url="<?= base_url('kriteria/hapus_sub/') ?>">Hapus</button>
+                                            <?php else: ?>
+                                                <span class="text-muted">-</span>
+                                            <?php endif ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">Tidak ada data</td>
+                                    <td colspan="<?= 4 + $count_nilai ?>" class="text-center">Tidak ada data</td>
                                 </tr>
                             <?php endif ?>
                         </tbody>
