@@ -6,7 +6,7 @@
                     <h2 class="card-title py-0 my-0 mt-2"><?= $page_title ?></h2>
                 </div>
                 <div class="card-body" style="display: block;">
-                    <form action="<?= site_url('kriteria/update/' . $kriteria->id) ?>" method="post">
+                    <form action="<?= site_url('kriteria/update_sub/' . $kriteria->id) ?>" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Kriteria</label>

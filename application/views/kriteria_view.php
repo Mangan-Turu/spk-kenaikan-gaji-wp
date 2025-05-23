@@ -83,7 +83,7 @@
                     <h2 class="card-title py-0 my-0 mt-2">Pembobotan Sub-kriteria</h2>
 
                     <div class="card-tools">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahSubKriteria">Tambah Kriteria</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahSubKriteria">Tambah Sub Kriteria</button>
                     </div>
                 </div>
                 <div class="card-body" style="display: block;">
@@ -94,7 +94,6 @@
                                 <th>Kode Kriteria</th>
                                 <th>Nama Kriteria</th>
                                 <th colspan="<?= $count_nilai ?>" class="text-center">Nilai</th>
-                                <th class="text-right" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,21 +114,18 @@
                                                 <?php if (!empty($nilaiList[$i]['id'])): ?>
                                                     <a href="<?= site_url('kriteria/edit_sub/' . $nilaiList[$i]['id']) ?>">
                                                         <?= htmlspecialchars($nilai) ?>
-                                                    </a>
+                                                    </a>&nbsp;&nbsp;
+                                                    <button class="btn btn-xs btn-danger btn-hapus d-inline align-middle"
+                                                            data-id="<?= $nilaiList[$i]['id'] ?>"
+                                                            data-url="<?= base_url('kriteria/hapus_sub/') ?>"
+                                                            style="padding: 0.1rem 0.3rem; font-size: 0.7rem; line-height: 1;">
+                                                        &times;
+                                                    </button>
                                                 <?php else: ?>
                                                     <?= htmlspecialchars($nilai) ?>
                                                 <?php endif; ?>
                                             </td>
                                         <?php endfor; ?>
-                                        <td class="text-right">
-                                            <?php if (!empty($nilaiList[0]['id'])): ?>
-                                                <button class="btn btn-sm btn-danger btn-hapus"
-                                                    data-id="<?= $nilaiList[0]['id'] ?>"
-                                                    data-url="<?= base_url('kriteria/hapus_sub/') ?>">Hapus</button>
-                                            <?php else: ?>
-                                                <span class="text-muted">-</span>
-                                            <?php endif ?>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
