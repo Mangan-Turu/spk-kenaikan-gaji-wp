@@ -32,11 +32,11 @@ class Kriteria_sub_model extends CI_Model
 
     public function delete($id)
     {
-        return $this->db->delete($this->table, [
-            'id' => $id,
+        return $this->db->update($this->table, [
+            'deskripsi' => 'masukan nilai',
             'created_by' => $this->user_id
-        ]);
-    }
+        ], ['id' => $id]);
+    }    
 
     public function get_all()
     {

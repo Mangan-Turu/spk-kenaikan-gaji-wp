@@ -121,7 +121,7 @@ class Kriteria extends CI_Controller
 
     public function edit_sub($id)
     {
-        $data['page_title'] = 'Edit Kriteria';
+        $data['page_title'] = 'Edit Sub Kriteria';
         $data['kriteria'] = $this->Kriteria_sub_model->get_by_id($id);
         $data['kriteria_options'] = $this->Kriteria_sub_model->getOption();
 
