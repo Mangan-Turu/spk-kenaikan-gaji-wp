@@ -58,7 +58,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title py-0 my-0 mt-2">Pembobotan Subkriteria</h2>
+                    <h2 class="card-title py-0 my-0 mt-2">Pembobotan Sub-kriteria</h2>
 
                     <div class="card-tools">
                         <button class="btn btn-primary">Tambah Kriteria</button>
@@ -71,29 +71,29 @@
                                 <th>No</th>
                                 <th>Kode Kriteria</th>
                                 <th>Nama Kriteria</th>
-                                <th colspan="2" class="text-center">Nilai</th>
+                                <th colspan="<?= !empty($kriteria_sub['1']['nilai']) ? count($kriteria_sub['1']['nilai']) : 1 ?>" class="text-center">Nilai</th>
                                 <th class="text-right" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (count($kriteria) > 0) : ?>
-                                <?php $no = 1; ?>
-                                <?php foreach ($kriteria as $k) : ?>
+                            <?php if (count($kriteria_sub) > 0) : ?>
+                                <?php foreach ($kriteria_sub as $key => $row): ?>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $k->kode; ?></td>
-                                        <td><?= $k->nama; ?></td>
-                                        <td class="text-center"><?= $k->bobot; ?>%</td>
-                                        <td class="text-center"><?= $k->bobot / 100; ?></td>
+                                        <td><?= $key ?></td>
+                                        <td><?= $row['kode'] ?></td>
+                                        <td><?= $row['nama'] ?></td>
+                                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                                            <td class="text-center"><?= isset($row['nilai'][$i]) ? $row['nilai'][$i] : '-' ?></td>
+                                        <?php endfor; ?>
                                         <td class="text-right">
-                                            <button class="d-inline-block btn btn-sm btn-warning btn-edit" data-table="kriteria_sub">Edit</button>
-                                            <button class="d-inline-block btn btn-sm btn-danger btn-hapus" data-table="kriteria_sub" data-id="<?= $k->id ?>">Hapus</button>
+                                            <button class="d-inline-block btn btn-sm btn-warning btn-edit" data-table="kriteria">Edit</button>
+                                            <button class="d-inline-block btn btn-sm btn-danger btn-hapus" data-table="kriteria" data-id="<?= $k->id ?>">Hapus</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="4" class="text-center">Tidak ada data</td>
+                                    <td colspan="5" class="text-center">Tidak ada data</td>
                                 </tr>
                             <?php endif ?>
                         </tbody>

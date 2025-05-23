@@ -54,9 +54,10 @@ class Kriteria_sub_model extends CI_Model
         $this->db->from('kriteria_sub');
         $this->db->join('kriteria', 'kriteria.id = kriteria_sub.kriteria_id');
         $this->db->where('kriteria_sub.created_by', $this->user_id);
+        $this->db->order_by('kriteria.id', 'ASC');
 
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
     public function get_by_id($id)

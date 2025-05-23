@@ -35,4 +35,10 @@ INSERT INTO kriteria_sub (kriteria_id, nilai, deskripsi, created_by, updated_by)
 (5, 2, 'Kurang', 1, 1),
 (5, 3, 'Cukup', 1, 1),
 (5, 4, 'Baik', 1, 1),
-(5, 5, 'Sangat Baik', 1, 1);
+(5, 5, 'Sangat Baik', 1, 1),
+
+(6, 1, 'Sangat Kurang', 1, 1),
+(6, 2, 'Kurang', 1, 1),
+(6, 3, 'Cukup', 1, 1),
+(6, 4, 'Baik', 1, 1),
+(6, 5, 'Sangat Baik', 1, 1);
