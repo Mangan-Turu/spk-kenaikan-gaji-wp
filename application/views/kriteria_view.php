@@ -108,12 +108,18 @@
                                         for ($i = 0; $i < $count_nilai; $i++) :
                                             $nilai = isset($nilaiList[$i]) ? $nilaiList[$i]['deskripsi'] : '-';
                                         ?>
-                                            <td class="text-center"><?= htmlspecialchars($nilai) ?></td>
+                                            <td class="text-center">
+                                                <?php if (!empty($nilaiList[$i]['id'])): ?>
+                                                    <a href="<?= site_url('kriteria/edit_sub/' . $nilaiList[$i]['id']) ?>">
+                                                        <?= htmlspecialchars($nilai) ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <?= htmlspecialchars($nilai) ?>
+                                                <?php endif; ?>
+                                            </td>
                                         <?php endfor; ?>
-
                                         <td class="text-right">
                                             <?php if (!empty($nilaiList[0]['id'])): ?>
-                                                <a href="<?= site_url('kriteria/edit_sub/' . $nilaiList[0]['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
                                                 <button class="btn btn-sm btn-danger btn-hapus"
                                                     data-id="<?= $nilaiList[0]['id'] ?>"
                                                     data-url="<?= base_url('kriteria/hapus_sub/') ?>">Hapus</button>
