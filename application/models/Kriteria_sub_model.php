@@ -68,4 +68,13 @@ class Kriteria_sub_model extends CI_Model
             ->get($this->table)
             ->row();
     }
+
+    public function get_by_kriteria($kriteria_id)
+    {
+        return $this->db
+            ->where('kriteria_id', $kriteria_id)
+            ->where('created_by', $this->user_id)
+            ->get($this->table)
+            ->result_array();
+    }
 }
