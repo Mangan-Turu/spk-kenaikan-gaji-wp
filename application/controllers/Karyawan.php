@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Karyawan extends CI_Controller 
+class Karyawan extends MY_Controller 
 {
     protected $page_title = '';
 

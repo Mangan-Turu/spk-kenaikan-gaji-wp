@@ -35,13 +35,19 @@
                                     <th rowspan="2" class="align-middle text-start">No</th>
                                     <th rowspan="2" class="align-middle text-start text-nowrap">Nama</th>
                                     <th rowspan="2" class="align-middle text-start">Jenis Kelamin</th>
-                                    <th colspan="<?= count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Input Nilai</th>
+                                    <th colspan="<?= @count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Input Nilai</th>
                                 </tr>
-                                <tr>
-                                    <?php foreach ($karyawans[0]['kriterias'] as $kriteria) : ?>
-                                        <th class="text-center"><?= $kriteria['kode'] . '<br>' . $kriteria['nama_kriteria']; ?></th>
-                                    <?php endforeach ?>
-                                </tr>
+                                <?php if (!empty($karyawans) && isset($karyawans[0]['kriterias'])) : ?>
+                                    <tr>
+                                        <?php foreach ($karyawans[0]['kriterias'] as $kriteria) : ?>
+                                            <th class="text-center"><?= $kriteria['kode'] . '<br>' . $kriteria['nama_kriteria']; ?></th>
+                                        <?php endforeach ?>
+                                    </tr>
+                                <?php else : ?>
+                                    <tr>
+                                        <th colspan="100%" class="text-center">Tidak ada data karyawan / kriteria</th>
+                                    </tr>
+                                <?php endif; ?>
                             </thead>
                             <tbody>
                                 <?php if (count($karyawans) > 0) : ?>

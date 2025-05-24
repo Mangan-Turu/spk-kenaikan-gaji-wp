@@ -40,7 +40,6 @@ class Penilaian_model extends CI_Model
 
         // Transform to nested
         $grouped = [];
-
         foreach ($flat as $row) {
             $karyawanId = $row['karyawan_id'];
 
@@ -113,7 +112,7 @@ class Penilaian_model extends CI_Model
             kriteria.bobot,
             ROUND(kriteria.bobot / 100, 2) AS nilai_normalisasi,
             penilaian.kriteria_sub_id,
-            kriteria_sub.nilai AS nilai_sub,
+            (kriteria_sub.nilai * 10) AS nilai_sub,
             kriteria_sub.deskripsi AS deskripsi_sub
         ');
         $this->db->from($this->table);

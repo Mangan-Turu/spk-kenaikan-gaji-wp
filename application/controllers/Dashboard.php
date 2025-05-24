@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class Dashboard extends MY_Controller
 {
     protected $for_role = 'admin';
 
@@ -10,8 +10,6 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Users_model');
-
-        check_role($this->for_role);
     }
 
     public function index()

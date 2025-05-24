@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Knowledge extends CI_Controller
+class Knowledge extends MY_Controller
 {
     public function __construct()
     {
@@ -13,32 +13,25 @@ class Knowledge extends CI_Controller
 
     public function index()
     {
-        $alternatif_id = 1;
+        $alternatif = 3;
+        $get_nilai_karyawan = $this->Penilaian_model->get_nilai_by_karyawan($alternatif);
 
-        // Ambil data nilai dan normalisasi berdasarkan karyawan
-        $get_nilai_karyawan = $this->Penilaian_model->get_nilai_by_karyawan($alternatif_id);
-
-        $vektor = [];
+        $vektor = 1;
         foreach ($get_nilai_karyawan as $val) {
-            $nilai     = floatval($val['nilai_sub']);
-            $pangkat   = floatval($val['nilai_normalisasi']);
+            $nilai   = floatval($val['nilai_sub']);
+            $bobot   = floatval($val['nilai_normalisasi']);
 
-            // Pastikan nilai valid
-            if ($nilai > 0 && $pangkat !== null) {
-                $vektor[] = pow($nilai, $pangkat);
-            } else {
-                $vektor[] = 0; // fallback jika ada nilai tidak valid
+            $pangkat = round(pow($nilai, $bobot), 4);
+
+            echo "pow($nilai, $bobot) = $pangkat<br>";
+
+            if ($nilai > 0) {
+                $vektor *= $pangkat;
             }
         }
 
-        // Hitung total jumlah vektor
-        $vektor_sum = array_sum($vektor);
+        echo "<br><b>Hasil akhir:</b> " . round($vektor, 4);
 
-        // Output
-        echo json_encode([
-            'vektor' => $vektor,
-            'total'  => $vektor_sum
-        ]);
-        die;
+        return;
     }
 }
