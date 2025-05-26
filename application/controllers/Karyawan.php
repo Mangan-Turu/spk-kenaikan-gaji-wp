@@ -38,6 +38,7 @@ class Karyawan extends MY_Controller
     {
         $data = [
             'nama_lengkap'     => $this->input->post('nama_lengkap'),
+            'nik'              => $this->input->post('nik'),
             'jenis_kelamin'    => $this->input->post('jenis_kelamin'),
             'tempat_lahir'     => $this->input->post('tempat_lahir'),
             'tanggal_lahir'    => $this->input->post('tanggal_lahir'),
@@ -65,6 +66,7 @@ class Karyawan extends MY_Controller
     {
         $data = [
             'nama_lengkap'     => $this->input->post('nama_lengkap'),
+            'nik'              => $this->input->post('nik'),
             'jenis_kelamin'    => $this->input->post('jenis_kelamin'),
             'tempat_lahir'     => $this->input->post('tempat_lahir'),
             'tanggal_lahir'    => $this->input->post('tanggal_lahir'),

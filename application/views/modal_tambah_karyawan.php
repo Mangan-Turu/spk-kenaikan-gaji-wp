@@ -15,6 +15,10 @@
                             <input type="text" name="nama_lengkap" class="form-control" required>
                         </div>
                         <div class="form-group col-md-6">
+                            <label>NIK</label>
+                            <input type="text" name="nik" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control" required>
                             <option value="">Pilih</option>
