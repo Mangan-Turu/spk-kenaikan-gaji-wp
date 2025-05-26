@@ -16,66 +16,34 @@
                                     <th rowspan="2" class="align-middle text-start" style="width: 20px;">No</th>
                                     <th rowspan="2" class="align-middle text-start">Nama</th>
                                     <th rowspan="2" class="align-middle text-center" style="width: 200px;">Aksi</th>
-                                    <th colspan="3" class="align-middle text-center">Kriteria</th>
+                                    <th colspan="<?= @count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Kriteria</th>
                                     <th rowspan="2" class="align-middle text-center">Nilai Hasil</th>
                                     <th rowspan="2" class="align-middle text-start">Keputusan</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">C1</th>
-                                    <th class="text-center">C2</th>
-                                    <th class="text-center">C3</th>
+                                    <?php foreach ($karyawans[0]['kriterias'] as $kriteria) : ?>
+                                        <th class="text-center"><?= $kriteria['kode'] ?></th>
+                                    <?php endforeach ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1.</td>
-                                    <td class="text-center">Budi Setiawan</td>
-                                    <td class="text-center">
-                                        <a href="<?= site_url('karyawan/edit/') ?>" class="btn btn-sm btn-info">Detail Perhitungan</a>
-                                    </td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-start">Layak</td>
-                                </tr>
-                                <!-- <tr style="background-color: #FFF4F5;">
-                                    <td class="text-center">1.</td>
-                                    <td class="text-center">Budi Setiawan</td>
-                                    <a href="</?= site_url('karyawan/edit/') ?>" class="btn btn-sm btn-success">Detail Perhitungan</a>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-start text-danger">Tidak Layak</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1.</td>
-                                    <td class="text-center">Budi Setiawan</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-start">Layak</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1.</td>
-                                    <td class="text-center">Budi Setiawan</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-start">Layak</td>
-                                </tr>
-                                <tr style="background-color: #FFF4F5;">
-                                    <td class="text-center">1.</td>
-                                    <td class="text-center">Budi Setiawan</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-center">0.0671</td>
-                                    <td class="text-start text-danger">Tidak Layak</td>
-                                </tr> -->
+                                <?php if (isset($karyawans)) : ?>
+                                    <?php foreach ($karyawans as $key => $value) : ?>
+                                        <tr>
+                                            <td class="text-center"><?= $key + 1; ?>.</td>
+                                            <td class="text-start"><?= $value['nama_lengkap']; ?></td>
+                                            <td class="text-center">
+                                                <a href="<?= site_url('karyawan/edit/') ?>" class="btn btn-sm btn-info">Detail Perhitungan</a>
+                                            </td>
+                                            <?php foreach ($value['kriterias'] as $kriteria) : ?>
+                                                <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-'; ?></td>
+                                            <?php endforeach ?>
+                                            <td class="text-center">0.0671</td>
+                                            <td class="text-start">Layak</td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+
                                 <!-- <tr>
                                     <td colspan="7" class="text-center">Tidak ada data</td>
                                 </tr> -->

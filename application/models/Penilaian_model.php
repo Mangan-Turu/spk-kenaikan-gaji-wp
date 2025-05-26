@@ -60,12 +60,13 @@ class Penilaian_model extends CI_Model
             }
 
             $grouped[$karyawanId]['kriterias'][] = [
-                'penilaian_id'     => $row['penilaian_id'],
-                'kriteria_id'      => $row['kriteria_id'],
-                'kode'             => $row['kode'],
-                'nama_kriteria'    => $row['nama_kriteria'],
-                'bobot'            => $row['bobot'],
-                'kriteria_sub_id'  => $row['kriteria_sub_id'],
+                'penilaian_id'          => $row['penilaian_id'],
+                'kriteria_id'           => $row['kriteria_id'],
+                'kode'                  => $row['kode'],
+                'nama_kriteria'         => $row['nama_kriteria'],
+                'bobot'                 => $row['bobot'],
+                'kriteria_sub_id'       => $row['kriteria_sub_id'],
+                'kriteria_sub_nilai'    => $row['nilai_sub'],
             ];
         }
 
@@ -113,7 +114,8 @@ class Penilaian_model extends CI_Model
             ROUND(kriteria.bobot / 100, 2) AS nilai_normalisasi,
             penilaian.kriteria_sub_id,
             (kriteria_sub.nilai * 10) AS nilai_sub,
-            kriteria_sub.deskripsi AS deskripsi_sub
+            kriteria_sub.deskripsi AS deskripsi_sub,
+            kriteria_sub.nilai AS nilai,
         ');
         $this->db->from($this->table);
         $this->db->join('karyawan', 'karyawan.id = penilaian.karyawan_id');
