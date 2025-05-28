@@ -38,8 +38,8 @@
                                             <?php foreach ($value['kriterias'] as $kriteria) : ?>
                                                 <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-'; ?></td>
                                             <?php endforeach ?>
-                                            <td class="text-center">0.0671</td>
-                                            <td class="text-start">Layak</td>
+                                            <td class="text-center"><?= $value['hasil']; ?></td>
+                                            <td class="text-start"><?= $value['keputusan']; ?></td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php endif ?>

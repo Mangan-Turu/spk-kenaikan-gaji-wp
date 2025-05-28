@@ -54,10 +54,16 @@ class Knowledge extends MY_Controller
         echo '<br><br>';
         foreach ($vektors as $item) {
             $nilaiHasil = $this->nilaiVi($item['vektor'], $total);
-            echo "Nilai Vi untuk Karyawan ID {$item['karyawan_id']}: " . $nilaiHasil . ' || ' . $this->keputusan($nilaiHasil) .'<br>';
+            echo "Nilai Vi untuk Karyawan ID {$item['karyawan_id']}: " . $nilaiHasil . ' || ' . $this->keputusan($nilaiHasil) . '<br>';
         }
 
         return;
+    }
+
+    public function nilaiHasil($nilai, $bobot)
+    {
+        $hasil = $nilai ** $bobot;
+        return $hasil;
     }
 
     public function nilaiVi($vektor, $totalVektor)
@@ -73,5 +79,50 @@ class Knowledge extends MY_Controller
         } else {
             return 'Tidak Layak';
         }
+    }
+
+    public function coba()
+    {
+        $this->HitungNilaiHasil(97);
+    }
+
+    public function HitungNilaiHasil($karyawanId)
+    {
+        $get_nilai_karyawan = $this->Penilaian_model->get_nilai_by_karyawan($karyawanId);
+
+        $vektor = 1;
+        foreach ($get_nilai_karyawan as $nilaiItem) {
+            $nilai = floatval($nilaiItem['nilai']);
+            $bobot = floatval($nilaiItem['nilai_normalisasi']);
+            $hasilPangkat = $nilai ** $bobot;
+
+            if ($nilai > 0) {
+                $vektor *= $hasilPangkat;
+            }
+        }
+
+        $total = 0;
+        $all_karyawan = $this->Karyawan_model->get_all();
+        foreach ($all_karyawan as $karyawan) {
+            $nilai_kar = $this->Penilaian_model->get_nilai_by_karyawan($karyawan->id);
+            $v = 1;
+            foreach ($nilai_kar as $n) {
+                $val = floatval($n['nilai']);
+                $bobot = floatval($n['nilai_normalisasi']);
+                if ($val > 0) {
+                    $v *= $val ** $bobot;
+                }
+            }
+            $total += $v;
+        }
+
+
+        $nilaiVi = $this->nilaiVi($vektor, $total);
+        $keputusan = $this->keputusan($nilaiVi);
+
+        return [
+            'nilaiVi' => $nilaiVi,
+            'keputusan' => $keputusan
+        ];
     }
 }
