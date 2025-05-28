@@ -124,4 +124,68 @@ class Penilaian_model extends CI_Model
         $this->db->where('penilaian.karyawan_id', $karyawan_id);
         return $this->db->get()->result_array();
     }
+
+    public function get_by_id($id)
+    {
+        $this->db->select('
+            penilaian.id,
+            penilaian.karyawan_id,
+            karyawan.nik,
+            karyawan.nama_lengkap,
+            karyawan.departemen,
+            karyawan.jenis_kelamin,
+            penilaian.id AS penilaian_id,
+            penilaian.kriteria_id,
+            kriteria.kode,
+            kriteria.nama AS nama_kriteria,
+            kriteria.bobot,
+            penilaian.kriteria_sub_id,
+            kriteria_sub.nilai AS nilai_sub,
+            kriteria_sub.deskripsi AS deskripsi_sub,
+            penilaian.created_at,
+            penilaian.updated_at,
+            penilaian.created_by,
+            penilaian.updated_by
+        ');
+        $this->db->from($this->table);
+        $this->db->join('karyawan', 'karyawan.id = penilaian.karyawan_id');
+        $this->db->join('kriteria', 'kriteria.id = penilaian.kriteria_id');
+        $this->db->join('kriteria_sub', 'kriteria_sub.id = penilaian.kriteria_sub_id', 'left');
+        $this->db->where('penilaian.created_by', $this->session->userdata('user_id'));
+        $this->db->where('karyawan.id', $id);
+        $this->db->order_by('penilaian.karyawan_id ASC, penilaian.kriteria_id ASC');
+
+        $flat = $this->db->get()->result_array();
+
+        // Transform to nested
+        $karyawanId = $flat[0]['karyawan_id'];
+        $result = [
+            'id'            => $flat[0]['id'],
+            'karyawan_id'   => $karyawanId,
+            'nik'           => $flat[0]['nik'],
+            'nama_lengkap'  => $flat[0]['nama_lengkap'],
+            'departemen'    => $flat[0]['departemen'],
+            'jenis_kelamin' => $flat[0]['jenis_kelamin'],
+            'created_at'    => $flat[0]['created_at'],
+            'updated_at'    => $flat[0]['updated_at'],
+            'created_by'    => $flat[0]['created_by'],
+            'updated_by'    => $flat[0]['updated_by'],
+            'kriterias'     => []
+        ];
+
+        foreach ($flat as $row) {
+            $result['kriterias'][] = [
+                'penilaian_id'       => $row['penilaian_id'],
+                'kriteria_id'        => $row['kriteria_id'],
+                'kode'               => $row['kode'],
+                'nama_kriteria'      => $row['nama_kriteria'],
+                'bobot'              => $row['bobot'],
+                'kriteria_sub_id'    => $row['kriteria_sub_id'],
+                'kriteria_sub_nilai' => $row['nilai_sub'],
+                'deskripsi_sub'      => $row['deskripsi_sub'],
+            ];
+        }
+
+        return $result;
+    }
 }

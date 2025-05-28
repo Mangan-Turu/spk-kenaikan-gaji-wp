@@ -7,6 +7,7 @@ class Hasil extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Penilaian_model');
+        $this->load->model('Karyawan_model');
         $this->load->library('Knowledge_lib');
     }
 
@@ -26,6 +27,16 @@ class Hasil extends MY_Controller
         $data['karyawans'] = $get_data_karyawan;
 
         $data['contents'] = $this->load->view('hasil_view', $data, true);
+        $this->load->view('templates/admin_templates', $data);
+    }
+
+    public function detail($karyawanId)
+    {
+        $data = [];
+        $data['karyawan']       = $this->Karyawan_model->get_by_id($karyawanId);
+        $data['karyawan_nilai'] = $this->Penilaian_model->get_by_id($karyawanId);
+
+        $data['contents'] = $this->load->view('hasil_detail_view', $data, true);
         $this->load->view('templates/admin_templates', $data);
     }
 }

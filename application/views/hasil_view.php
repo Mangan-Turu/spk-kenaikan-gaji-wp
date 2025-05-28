@@ -33,7 +33,7 @@
                                             <td class="text-center"><?= $key + 1; ?>.</td>
                                             <td class="text-start"><?= $value['nama_lengkap']; ?></td>
                                             <td class="text-center">
-                                                <a href="<?= site_url('karyawan/edit/') ?>" class="btn btn-sm btn-info">Detail Perhitungan</a>
+                                                <a href="<?= site_url('hasil/detail/' . $value['karyawan_id']) ?>" class="btn btn-sm btn-info">Detail Perhitungan</a>
                                             </td>
                                             <?php foreach ($value['kriterias'] as $kriteria) : ?>
                                                 <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-'; ?></td>
