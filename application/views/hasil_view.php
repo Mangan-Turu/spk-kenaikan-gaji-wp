@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <h2 class="card-title py-0 my-0 mt-2">Input Penilaian Karyawan</h2>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-primary">Lihat Perhitungan</button>
+                            <a href="<?= base_url('hasil/perhitungan'); ?>" class="btn btn-primary">Lihat Perhitungan</a>
                         </div>
                     </div>
                     <div class="card-body" style="display: block;">

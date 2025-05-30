@@ -79,27 +79,79 @@
 
                         <div class="row mt-2">
                             <div class="col">
-                                <h5>Normalisasi Bobot</h5>
+                                <h5>Proses Perhitungan</h5>
                                 <hr>
-                                <table class="table table-bordered table-striped w-100">
-                                    <tbody>
-                                        <tr>
-                                            <th rowspan="2" class="align-middle text-start">Nama</th>
-                                            <th colspan="<?= count($karyawan_nilai['kriterias']) ?>" class="text-center">Kriteria</th>
-                                        </tr>
-                                        <tr>
-                                            <?php foreach ($karyawan_nilai['kriterias'] as $kriteria) : ?>
-                                                <th class="text-center"><?= $kriteria['kode'] ?? '-' ?></th>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-start"><?= $karyawan_nilai['nama_lengkap']; ?></td>
-                                            <?php foreach ($karyawan_nilai['kriterias'] as $kriteria) : ?>
-                                                <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-' ?></td>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>1. Normalisasi Bobot</h6>
+                                        <div class="row">
+                                            <div class="col">
+                                                <table>
+                                                    <tr>
+                                                        <td rowspan="2"><b>w1 </b><span class="px-2">=</span></td>
+                                                        <td colspan="12" class="border-bottom text-center">30</td>
+                                                        <td rowspan="2"><span class="px-2">=</span>0.3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>30</td>
+                                                        <td>+</td>
+                                                        <td>20</td>
+                                                        <td>+</td>
+                                                        <td>15</td>
+                                                        <td>+</td>
+                                                        <td>15</td>
+                                                        <td>+</td>
+                                                        <td>10</td>
+                                                        <td>+</td>
+                                                        <td>10</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <table>
+                                                    <tr>
+                                                        <td rowspan="2"><b>w1 </b><span class="px-2">=</span></td>
+                                                        <td colspan="12" class="border-bottom text-center">30</td>
+                                                        <td rowspan="2"><span class="px-2">=</span>0.3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>30</td>
+                                                        <td>+</td>
+                                                        <td>20</td>
+                                                        <td>+</td>
+                                                        <td>15</td>
+                                                        <td>+</td>
+                                                        <td>15</td>
+                                                        <td>+</td>
+                                                        <td>10</td>
+                                                        <td>+</td>
+                                                        <td>10</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mt-4">
+                                                <b>Ʃwj</b> = 30 + 20 + 15 + 15 + 10 + 10 = 100
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>2. Menghitung Nilai Vektor</h6>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>
+                                                    <b>s1</b> <span class="px-2">=</span> <span>(5<sup>0.2</sup>)</span><span>(5<sup>0.2</sup>)</span> <span class="px-2">=</span> <span>5.000</span>
+                                                </p>
+                                                <p>
+                                                    <b>Total</b> <span class="px-2">=</span> <span>5000 + 2000 = 5000</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
