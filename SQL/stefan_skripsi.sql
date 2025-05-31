@@ -1,28 +1,7 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               8.0.30 - MySQL Community Server - GPL
--- Server OS:                    Win64
--- HeidiSQL Version:             12.1.0.6537
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Dumping database structure for spk_stefan
-CREATE DATABASE IF NOT EXISTS `spk_stefan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `spk_stefan`;
-
 -- Dumping structure for table spk_stefan.karyawan
 CREATE TABLE IF NOT EXISTS `karyawan` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nik` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nik` varchar(20) DEFAULT NULL,
   `nama_lengkap` varchar(100) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
   `tempat_lahir` varchar(50) DEFAULT NULL,
@@ -33,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `jabatan` varchar(100) DEFAULT NULL,
   `departemen` varchar(100) DEFAULT NULL,
   `tanggal_masuk` date DEFAULT NULL,
-  `status_karyawan` enum('Tetap','Kontrak','Magang') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Tetap',
+  `status_karyawan` enum('Tetap','Kontrak','Magang') DEFAULT 'Tetap',
   `foto` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -41,10 +20,9 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `updated_by` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nik` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)
 
 -- Dumping data for table spk_stefan.karyawan: ~20 rows (approximately)
-DELETE FROM `karyawan`;
 INSERT INTO `karyawan` (`id`, `nik`, `nama_lengkap`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `no_hp`, `email`, `jabatan`, `departemen`, `tanggal_masuk`, `status_karyawan`, `foto`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
 	(97, 'K2RY001', 'Karyawan 1', 'L', 'Jakarta', '1990-03-15', 'Jl. Merdeka No. 1', '081234567891', 'karyawan1@example.com', 'Manager HRD', 'HRD', '2015-06-01', 'Tetap', 'uploads/foto/1.jpg', '2025-05-26 17:26:16', '2025-05-26 17:26:16', 1, 1),
 	(98, 'K2RY002', 'Karyawan 2', 'P', 'Bandung', '1991-04-20', 'Jl. Sudirman No. 2', '081234567892', 'karyawan2@example.com', 'Staff HRD', 'HRD', '2016-07-01', 'Tetap', 'uploads/foto/2.jpg', '2025-05-26 17:26:16', '2025-05-26 17:26:16', 1, 1),
@@ -79,10 +57,9 @@ CREATE TABLE IF NOT EXISTS `kriteria` (
   `created_by` int DEFAULT NULL,
   `updated_by` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- Dumping data for table spk_stefan.kriteria: ~6 rows (approximately)
-DELETE FROM `kriteria`;
 INSERT INTO `kriteria` (`id`, `kode`, `nama`, `atribut`, `bobot`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
 	(1, 'C1', 'Kinerja', 'benefit', 30, '2025-05-23 18:13:52', '2025-05-23 18:15:29', 1, 1),
 	(2, 'C2', 'Presensi', 'benefit', 20, '2025-05-23 18:13:52', '2025-05-23 18:15:29', 1, 1),
@@ -104,10 +81,9 @@ CREATE TABLE IF NOT EXISTS `kriteria_sub` (
   PRIMARY KEY (`id`),
   KEY `kriteria_id` (`kriteria_id`),
   CONSTRAINT `kriteria_sub_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- Dumping data for table spk_stefan.kriteria_sub: ~31 rows (approximately)
-DELETE FROM `kriteria_sub`;
 INSERT INTO `kriteria_sub` (`id`, `kriteria_id`, `nilai`, `deskripsi`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
 	(195, 1, 1, 'masukan nilai', '2025-05-23 22:11:21', '2025-05-26 14:36:20', 1, 1),
 	(196, 1, 2, 'Kurang', '2025-05-23 22:11:21', '2025-05-23 22:11:21', 1, 1),
@@ -158,10 +134,9 @@ CREATE TABLE IF NOT EXISTS `penilaian` (
   CONSTRAINT `penilaian_ibfk_1` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE,
   CONSTRAINT `penilaian_ibfk_2` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`id`) ON DELETE CASCADE,
   CONSTRAINT `penilaian_ibfk_3` FOREIGN KEY (`kriteria_sub_id`) REFERENCES `kriteria_sub` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=491 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- Dumping data for table spk_stefan.penilaian: ~120 rows (approximately)
-DELETE FROM `penilaian`;
 INSERT INTO `penilaian` (`id`, `karyawan_id`, `kriteria_id`, `kriteria_sub_id`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
 	(352, 97, 1, 199, '2025-05-26 17:26:16', '2025-05-26 10:31:27', 1, 1),
 	(353, 97, 2, 204, '2025-05-26 17:26:16', '2025-05-26 10:31:27', 1, 1),
@@ -290,19 +265,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `nama` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
-  `role` enum('admin','user') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `role` enum('admin','user') DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- Dumping data for table spk_stefan.users: ~1 rows (approximately)
-DELETE FROM `users`;
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
 	(1, 'Abdullah Faza Farhan', 'admin@mail.com', '$2y$10$2ORR5mV0cmqcwB1WVyE1C.Ik/gnF5jZ/jvNYUz0XuFVxF9hFGL9xe', 'admin', '2025-05-08 16:10:01', NULL);
 
 -- Dumping structure for trigger spk_stefan.after_insert_karyawan
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+@OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `after_insert_karyawan` AFTER INSERT ON `karyawan` FOR EACH ROW BEGIN
   INSERT INTO penilaian (karyawan_id, kriteria_id, kriteria_sub_id, created_by, updated_by)
@@ -310,10 +284,4 @@ CREATE TRIGGER `after_insert_karyawan` AFTER INSERT ON `karyawan` FOR EACH ROW B
   FROM kriteria k;
 END//
 DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
-
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+SQL_MODE=@OLDTMP_SQL_MODE;
