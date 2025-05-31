@@ -7,18 +7,18 @@ $config['navigation'] = [
         'icon' => 'fas fa-tachometer-alt',
         'url' => '#',
         'active' => ['dashboard', 'index', 'index2'],
-        'children' => [
-            [
-                'label' => 'Dashboard v1',
-                'url' => 'index',
-                'active' => ['index'],
-            ],
-            [
-                'label' => 'Dashboard v2',
-                'url' => 'index2',
-                'active' => ['index2'],
-            ]
-        ]
+        // 'children' => [
+        //     [
+        //         'label' => 'Dashboard v1',
+        //         'url' => 'index',
+        //         'active' => ['index'],
+        //     ],
+        //     [
+        //         'label' => 'Dashboard v2',
+        //         'url' => 'index2',
+        //         'active' => ['index2'],
+        //     ]
+        // ]
     ],
     [
         'label' => 'Data Kriteria',
