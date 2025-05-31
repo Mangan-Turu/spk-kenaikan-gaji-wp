@@ -125,7 +125,6 @@
                                         <h6>2. Menghitung Nilai Vektor S</h6>
 
                                         <?php $s_values = []; ?>
-
                                         <div class="row">
                                             <div class="col">
                                                 <?php foreach ($karyawans as $key => $value) : ?>
@@ -143,7 +142,7 @@
                                                         ?>
                                                             <span>(
                                                                 <?= $nilai ?>
-                                                                <sup><?= number_format($bobot_normalisasi, 1) ?></sup>
+                                                                <sup><?= $bobot_normalisasi ?></sup>
                                                                 )</span><?= $i < $last_index ? ' × ' : '' ?>
                                                         <?php endforeach; ?>
                                                         <span class="px-2">=</span> <b><?= number_format($hasil, 4) ?></b>
@@ -171,12 +170,52 @@
                                             </div>
                                         </div>
 
-
                                         <hr>
 
                                         <h6>3. Perhitungan nilai vektor Vi dari setiap alternatif</h6>
 
-
+                                        <div class="row">
+                                            <div class="col-12 col-md-4">
+                                                <?php foreach ($s_values as $i => $val) : ?>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <table>
+                                                                <tr>
+                                                                    <td rowspan="2"><b><i>v</i><?= $i + 1; ?></b></td>
+                                                                    <td rowspan="2"><span class="px-2">=</span></td>
+                                                                    <td class="border-bottom text-center"><?= number_format($val, 3); ?></td>
+                                                                    <td rowspan="2"><span class="px-2">=</span></td>
+                                                                    <td rowspan="2"><b><?= number_format(($val / $total), 3); ?></b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?= number_format($total, 3); ?></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach ?>
+                                            </div>
+                                            <div class="col-12 col-md-8">
+                                                <table class="table table-bordered table-striped w-100">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">Karyawan</th>
+                                                            <th class="text-center">Nilai Vi</th>
+                                                            <th class="text-center">Keputusan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($karyawans as $key => $value) : ?>
+                                                            <tr>
+                                                                <td><?= $value['nama_lengkap']; ?></td>
+                                                                <td class="text-center"><?= number_format($value['hasil'], 3); ?></td>
+                                                                <td class="text-center"><?= $value['keputusan']; ?></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
