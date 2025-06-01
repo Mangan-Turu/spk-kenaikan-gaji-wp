@@ -17,7 +17,7 @@ class Hasil extends MY_Controller
         $data = [];
 
         $get_data_karyawan = $this->Penilaian_model->get_all();
-        $data['total_karyawan'] = count($get_data_karyawan);
+        $data['total_karyawan'] = is_array($get_data_karyawan) ? count($get_data_karyawan) : 0;
 
         foreach ($get_data_karyawan as $i => $karyawan) {
             $hasil = $this->knowledge_lib->HitungNilaiHasil($karyawan['karyawan_id']);
