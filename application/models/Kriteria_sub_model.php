@@ -54,7 +54,7 @@ class Kriteria_sub_model extends CI_Model
         ');
         $this->db->from('kriteria_sub');
         $this->db->join('kriteria', 'kriteria.id = kriteria_sub.kriteria_id');
-        $this->db->where('kriteria_sub.created_by', $this->user_id);
+        // $this->db->where('kriteria_sub.created_by', $this->user_id);
         $this->db->order_by('kriteria.id', 'ASC');
 
         $query = $this->db->get();
@@ -65,7 +65,7 @@ class Kriteria_sub_model extends CI_Model
     {
         return $this->db
             ->where('id', $id)
-            ->where('created_by', $this->user_id)
+            // ->where('created_by', $this->user_id)
             ->get($this->table)
             ->row();
     }
@@ -74,7 +74,7 @@ class Kriteria_sub_model extends CI_Model
     {
         return $this->db
             ->where('kriteria_id', $kriteria_id)
-            ->where('created_by', $this->user_id)
+            // ->where('created_by', $this->user_id)
             ->get($this->table)
             ->result_array();
     }

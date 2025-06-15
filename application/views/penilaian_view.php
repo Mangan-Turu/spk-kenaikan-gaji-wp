@@ -35,8 +35,8 @@
                                     <th rowspan="2" class="align-middle text-start">No</th>
                                     <th rowspan="2" class="align-middle text-start text-nowrap">Nama</th>
                                     <th rowspan="2" class="align-middle text-start">Jenis Kelamin</th>
-                                    <th colspan="<?= @count($karyawans[0]['kriterias']) ?>" class="align-middle text-center">Input Nilai</th>
-                                </tr>
+                                    <th colspan="<?= isset($karyawans[0]['kriterias']) ? count($karyawans[0]['kriterias']) : 0 ?>" class="align-middle text-center">Input Nilai</th>
+                                    </tr>
                                 <?php if (!empty($karyawans) && isset($karyawans[0]['kriterias'])) : ?>
                                     <tr>
                                         <?php foreach ($karyawans[0]['kriterias'] as $kriteria) : ?>
@@ -50,8 +50,8 @@
                                 <?php endif; ?>
                             </thead>
                             <tbody>
-                                <?php if (count($karyawans) > 0) : ?>
-                                    <?php $no = 1; ?>
+                                <?php if (!empty($karyawans)) : ?>
+                                <?php $no = 1; ?>
                                     <?php foreach ($karyawans as $k) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>

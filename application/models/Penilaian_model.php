@@ -33,7 +33,7 @@ class Penilaian_model extends CI_Model
         $this->db->join('karyawan', 'karyawan.id = penilaian.karyawan_id');
         $this->db->join('kriteria', 'kriteria.id = penilaian.kriteria_id');
         $this->db->join('kriteria_sub', 'kriteria_sub.id = penilaian.kriteria_sub_id', 'left');
-        $this->db->where('penilaian.created_by', $this->session->userdata('user_id'));
+        // $this->db->where('penilaian.created_by', $this->session->userdata('user_id'));
         $this->db->order_by('penilaian.karyawan_id ASC, penilaian.kriteria_id ASC');
 
         $flat = $this->db->get()->result_array();
@@ -93,7 +93,7 @@ class Penilaian_model extends CI_Model
     public function kosongkan_penilaian()
     {
         $this->db->set('kriteria_sub_id', null);
-        $this->db->where('created_by', $this->session->userdata('user_id'));
+        // $this->db->where('created_by', $this->session->userdata('user_id'));
         return $this->db->update($this->table);
     }
 
@@ -151,11 +151,15 @@ class Penilaian_model extends CI_Model
         $this->db->join('karyawan', 'karyawan.id = penilaian.karyawan_id');
         $this->db->join('kriteria', 'kriteria.id = penilaian.kriteria_id');
         $this->db->join('kriteria_sub', 'kriteria_sub.id = penilaian.kriteria_sub_id', 'left');
-        $this->db->where('penilaian.created_by', $this->session->userdata('user_id'));
+        // $this->db->where('penilaian.created_by', $this->session->userdata('user_id'));
         $this->db->where('karyawan.id', $id);
         $this->db->order_by('penilaian.karyawan_id ASC, penilaian.kriteria_id ASC');
 
         $flat = $this->db->get()->result_array();
+
+        if (empty($flat)) {
+            return null;
+        }    
 
         // Transform to nested
         $karyawanId = $flat[0]['karyawan_id'];

@@ -59,18 +59,26 @@
                                     <tbody>
                                         <tr>
                                             <th rowspan="2" class="align-middle text-start">Nama</th>
-                                            <th colspan="<?= count($karyawan_nilai['kriterias']) ?>" class="text-center">Kriteria</th>
-                                        </tr>
+                                            <th colspan="<?= isset($karyawan_nilai['kriterias']) ? count($karyawan_nilai['kriterias']) : 0 ?>" class="text-center">Kriteria</th>
+                                            </tr>
                                         <tr>
-                                            <?php foreach ($karyawan_nilai['kriterias'] as $kriteria) : ?>
+                                        <?php if (!empty($karyawan_nilai['kriterias'])): ?>
+                                            <?php foreach ($karyawan_nilai['kriterias'] as $kriteria): ?>
                                                 <th class="text-center"><?= $kriteria['kode'] ?? '-' ?></th>
                                             <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <th class="text-center">-</th>
+                                        <?php endif; ?>
                                         </tr>
                                         <tr>
-                                            <td class="text-start"><?= $karyawan_nilai['nama_lengkap']; ?></td>
-                                            <?php foreach ($karyawan_nilai['kriterias'] as $kriteria) : ?>
-                                                <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-' ?></td>
-                                            <?php endforeach; ?>
+                                        <td class="text-start"><?= $karyawan_nilai['nama_lengkap'] ?? '-' ?></td>
+                                            <?php if (!empty($karyawan_nilai['kriterias'])): ?>
+                                                <?php foreach ($karyawan_nilai['kriterias'] as $kriteria): ?>
+                                                    <td class="text-center"><?= $kriteria['kriteria_sub_nilai'] ?? '-' ?></td>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <td class="text-center">-</td>
+                                            <?php endif; ?>
                                         </tr>
                                     </tbody>
                                 </table>
