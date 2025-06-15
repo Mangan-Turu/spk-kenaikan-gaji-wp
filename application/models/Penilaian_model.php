@@ -188,4 +188,12 @@ class Penilaian_model extends CI_Model
 
         return $result;
     }
+
+    public function count_all()
+    {
+        $this->db->select('COUNT(DISTINCT karyawan_id) AS jumlah_karyawan');
+        $this->db->from('penilaian');
+        $query = $this->db->get();
+        return $query->row()->jumlah_karyawan;
+    }
 }

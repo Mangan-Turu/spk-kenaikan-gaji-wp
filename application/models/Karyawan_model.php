@@ -3,6 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Karyawan_model extends CI_Model
 {
+    protected $table = 'karyawan';
+
     public function get_all()
     {
         return $this->db->get('karyawan')->result();
@@ -28,4 +30,8 @@ class Karyawan_model extends CI_Model
         return $this->db->delete('karyawan', ['id' => $id]);
     }
 
+    public function count_all()
+    {
+        return $this->db->count_all($this->table);
+    }
 }

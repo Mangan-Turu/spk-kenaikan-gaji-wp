@@ -42,4 +42,9 @@ class Kriteria_model extends CI_Model
         $this->db->or_like('bobot', $search);
         return $this->db->get($this->table)->result();
     }
+
+    public function count_all()
+    {
+        return $this->db->count_all($this->table);
+    }
 }

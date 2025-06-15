@@ -217,6 +217,7 @@
 
             <!-- /.sidebar -->
         </aside>
+        <!-- End Main Sidebar Container -->
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper py-4">

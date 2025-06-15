@@ -36,7 +36,7 @@ class Kriteria_sub_model extends CI_Model
             'deskripsi' => 'masukan nilai',
             'created_by' => $this->user_id
         ], ['id' => $id]);
-    }    
+    }
 
     public function get_all()
     {
@@ -82,7 +82,12 @@ class Kriteria_sub_model extends CI_Model
     public function getOption()
     {
         $query = $this->db->select('id, nama')
-                          ->get($this->table_kriteria);
+            ->get($this->table_kriteria);
         return $query->result_array();
-    }    
+    }
+
+    public function count_all()
+    {
+        return $this->db->count_all($this->table);
+    }
 }
